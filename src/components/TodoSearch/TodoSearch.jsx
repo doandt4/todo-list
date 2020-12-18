@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-function TodoSearch({todos, onSearch}) {
+import './TodoSearch.scss'
+function TodoSearch({onSearch}) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
 
-  const handleOnChangeSearch = (e) =>{
+  const handleChangeSearch = (e) =>{
     setSearchTerm(e.target.value);
     onSearch(e.target.value)
   }
 
-  // useEffect(()=> {
-  //   const result = todos.filter((todo) => {
-  //     todo.toLowerCase().include(searchTerm)
-  //     setSearchResult(result)
-  //   })
-  // }, [searchTerm])
-
   return (
-    <div>
+    <div className="TodoSearch">
       <input 
+        name="search"
         type="text"
         placeholder="Search..."
         value={searchTerm}
-        onChange={handleOnChangeSearch}
+        onChange={handleChangeSearch}
       />
     </div>
   );
