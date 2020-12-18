@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./reset.css";
 import "./App.scss";
 import TodoList from "./components/TodoList/TodoList";
 import TodoForm from "./components/TodoForm/TodoForm";
+import TodoSearch from "./components/TodoSearch/TodoSearch";
 import "./components/FontawesomeIcons";
 
 const App = () =>{
@@ -14,6 +15,21 @@ const App = () =>{
       { id: 2, title: "I hate you 6000", isComplete: false, isEdit: false },
     ]
   );
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+
+  useEffect(() => {
+    const result = todoList.filter((todo) => {
+      return todo.title.toLowerCase().includes(searchTerm);
+    })
+    setSearchResult(result)
+  }, [todoList, searchTerm]);
+
+  const handleSearch = (value) => {
+    console.log(value);
+    setSearchTerm(value)
+  }
   
   const handleRemoveList = (todo) =>{
     const newTodoList = [...todoList].filter((todoItem) => todoItem.id !== todo.id);
@@ -52,9 +68,10 @@ const App = () =>{
   return (
     <div className="App">
       <h1>My to-dos</h1>
+      <TodoSearch onSearch={handleSearch} />
       <TodoForm onSubmit={handleSubmit} />
       <TodoList
-        todos={todoList}
+        todos={searchResult}
         removeList={handleRemoveList}
         onTodoClick={handleOnToDoClick}
         onSubmit={handleSubmit}
