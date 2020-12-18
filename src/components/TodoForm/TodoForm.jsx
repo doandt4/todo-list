@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import './style.scss'
 
 const TodoForm = ({onSubmit}) =>{
@@ -24,7 +25,7 @@ const TodoForm = ({onSubmit}) =>{
     return(
         <div className="TodoForm">
             <form onSubmit = {handleOnSubmit}>
-                <input className="TodoForm-Input" type="text" name="title" value = {values.title} onChange = {handleOnchange} placeholder="Create a new to-do..."/>
+                <input className="TodoForm-Input" type="text" name="title" value={values.title} onChange={handleOnchange} placeholder="Create a new to-do..."/>
             </form>    
         </div>
     )
