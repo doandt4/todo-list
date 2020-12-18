@@ -42,9 +42,9 @@ function App() {
 
   function onSubmitEdit(todo) {
     let newTodoList = [...todoList]
-    const element =  newTodoList.find(e => e.id === todo.id);
-    element.title = todo.title;
-    element.isEdit = false;
+    const todoItem =  newTodoList.find(todoItem => todoItem.id === todo.id);
+    todoItem.title = todo.title;
+    todoItem.isEdit = false;
     newTodoList = newTodoList.filter((todoItem) => todoItem.title !== '')
     setTodoList(newTodoList)
   }
