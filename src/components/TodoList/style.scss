@@ -1,6 +1,6 @@
-.todoList-Container {
+.TodoList {
   width: 540px;
-  .todo-item {
+  .TodoList-item {
     height: fit-content;
     display: flex;
     justify-content: space-between;
@@ -20,20 +20,20 @@
       border-bottom-right-radius: 5px;
     }
   }
-  .btn{
+  .TodoList-btn{
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
     transition: .3s ease-in-out 0s;
   }
-  .del-btn {
+  .TodoList-del-btn {
     color: #DC3545; 
     &:hover {
       background-color: #DC3545;
       color: #fff;
     }
   }
-  .edit-btn {
+  .TodoList-edit-btn {
     margin-right: 5px;
     color: #007BFF;
     &:hover{
@@ -41,24 +41,24 @@
       background-color: #007BFF;
     }
   }
-  .todo-item.isComplete p {
+  .TodoList-item.isComplete p {
     text-decoration: line-through;
   }
-  .title {
+  .TodoList-title {
     overflow-wrap: break-word;
     text-align: left;
     cursor: pointer;
     padding: 10px;
     width: 80%;
   }
-  .option-item {
+  .TodoList-option-item {
     display: flex;
     align-items: center;
   }
-  .input-Container {
+  .TodoList-input-Container {
     width: 80%;
   }
-  .title-input {
+  .TodoList-title-input {
     /* overflow-wrap: break-word; */
     text-align: left;
     /* cursor: pointer; */
