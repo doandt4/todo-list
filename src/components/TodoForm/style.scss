@@ -1,0 +1,17 @@
+.Form-Container {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: left;
+  input {
+    width: 90%;
+    padding: 10px 20px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    &:focus {
+      border: 1px solid #D5E9FF;
+      box-shadow: 0px 0px 5px 3px #adccee;
+    }
+   }
+  
+}
