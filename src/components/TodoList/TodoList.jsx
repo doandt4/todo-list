@@ -1,60 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
-// import "./style.css";
 import './style.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-TodoList.propTypes = {
-  todos: PropTypes.array,
-  removeList: PropTypes.func,
-  onTodoClick: PropTypes.func,
-};
-
-TodoList.defaultProps = {
-  todos: [],
-  removeList: null,
-  onTodoClick: null,
-};
-
-function TodoList(props) {
-  const { todos, removeList, onTodoClick, onClickEdit, onSubmitEdit,  } = props;
-  const [value, setValue] = useState();
-  const inputRef = useRef()
+const TodoList = ({ todos, removeList, onTodoClick, onClickEdit, onSubmitEdit }) =>{
+  const [value, setValue] = useState('');
+  const inputRef = useRef(null)
   
-  useEffect( ()=> {
-    if (inputRef.current){
-      // console.log(inputRef.current);
-      inputRef.current.focus()
-    }
-    return {
-
-    }
+  useEffect(()=> {
+    inputRef.current && inputRef.current.focus()
   })
 
-  function handleRemoveClick(todo) {
-    if(removeList) {
-      removeList(todo);
-    }
+  const handleRemoveClick = (todo) =>{
+    removeList && removeList(todo);
   }
 
-  function handleTodoClick(todo) {
-    if (onTodoClick) {
-      onTodoClick(todo);
-    }
+  const handleTodoClick = (todo) =>{
+    onTodoClick && onTodoClick(todo);
   }
 
-  function handleEdit(todo) {
+  const handleEdit = (todo) =>{
     if (onClickEdit) {
       setValue(todo.title);
 			onClickEdit(todo);
     } 
   }
 
-  function onChangeEdit(e) {
+  const onChangeEdit = (e) =>{
     setValue(e.target.value);
   }
 
-  function handleOnSubmitEdit(e, id) {
+  const handleOnSubmitEdit = (e, id) =>{
     e.preventDefault();
     onSubmitEdit && onSubmitEdit({
       title: value,
@@ -62,7 +37,7 @@ function TodoList(props) {
     });
   }
 
-	function handleOnBlur(e, id){
+	const handleOnBlur = (e, id) =>{
 		setValue(e.target.value)
 		onSubmitEdit && onSubmitEdit({
       title: value,
@@ -71,22 +46,20 @@ function TodoList(props) {
   }
   
   return (
-    <div className="todoList-Container">
+    <div className="TodoList">
       <ul>
-        {todos.map((todo, index) =>
+        {todos.length > 0 && todos.map((todo, index) =>
           !todo.isEdit ? (
-              <li className={`todo-item ${todo.isComplete ? 'isComplete' : ''}`} key={todo.id}>
-                <p className="title" onClick={() => handleTodoClick(todo)}>
+              <li className={`TodoList-item ${todo.isComplete ? 'isComplete' : ''}`} key={todo.id}>
+                <p className="TodoList-title" onClick={() => handleTodoClick(todo)}>
                   {todo.title}
                 </p>
-                <div className="option-item">
-                  <span className="edit-btn btn" onClick={() => handleEdit(todo)}>
-                    <FontAwesomeIcon
-                      icon={["fas", "edit"]}
-                    />
+                <div className="TodoList-option-item">
+                  <span className="TodoList-edit-btn TodoList-btn" onClick={() => handleEdit(todo)}>
+                    <FontAwesomeIcon icon={["fas", "edit"]}/>
                   </span>
                   <span
-                    className="del-btn btn"
+                    className="TodoList-del-btn TodoList-btn"
                     onClick={() => handleRemoveClick(todo)}
                   >
                     <FontAwesomeIcon icon={["fas", "trash"]} />
@@ -94,12 +67,12 @@ function TodoList(props) {
                 </div>
               </li>
             ) : (
-              <li className={`todo-item ${todo.isComplete ? 'isComplete' : ''}`} key={todo.id}>
-                  <div className="input-Container">
+              <li className={`TodoList-item ${todo.isComplete ? 'isComplete' : ''}`} key={todo.id}>
+                  <div className="TodoList-input-Container">
                     <form onSubmit={(e) => handleOnSubmitEdit(e, todo.id)} >
                         <input 
                           ref={inputRef}
-                          className="title-input"
+                          className="TodoList-title-input"
                           type="text"
                           onChange={onChangeEdit}
                           name="title"
@@ -108,14 +81,13 @@ function TodoList(props) {
                         />
                     </form>
                   </div>
-                <div className="option-item">
-                  <span className="edit-btn btn" onClick={() => handleEdit(todo)}>
-                    <FontAwesomeIcon
-                      icon={["fas", "edit"]}
+                <div className="TodoList-option-item">
+                  <span className="TodoList-edit-btn TodoList-btn" onClick={() => handleEdit(todo)}>
+                    <FontAwesomeIcon icon={["fas", "edit"]}
                     />
                   </span>
                   <span
-                    className="del-btn btn"
+                    className="TodoList-del-btn TodoList-btn"
                     onClick={() => handleRemoveClick(todo)}
                   >
                     <FontAwesomeIcon icon={["fas", "trash"]} />

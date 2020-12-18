@@ -6,7 +6,7 @@ import TodoList from "./components/TodoList/TodoList";
 import TodoForm from "./components/TodoForm/TodoForm";
 import "./components/FontawesomeIcons";
 
-function App() {
+const App = () =>{
   const [todoList, setTodoList] = useState(
     [
       { id: 0, title: "I love you", isComplete: true, isEdit: false },
@@ -15,32 +15,32 @@ function App() {
     ]
   );
   
-  function handleRemoveList(todo) {
+  const handleRemoveList = (todo) =>{
     const newTodoList = [...todoList].filter((todoItem) => todoItem.id !== todo.id);
     setTodoList(newTodoList);
   }
 
-  function handleOnToDoClick(todo) {
+  const handleOnToDoClick = (todo) =>{
     const newTodoList = [...todoList];
     const todoItem = newTodoList.find((todoItem) => todoItem.id === todo.id)
     todoItem.isComplete = !todoItem.isComplete;
     setTodoList(newTodoList);
   }
 
-  function handleClickEdit(todo) {
+  const handleClickEdit = (todo) =>{
     const newTodoList = [...todoList];
     const todoItem = newTodoList.find((todoItem) => todoItem.id === todo.id)
     todoItem.isEdit = true;
     setTodoList(newTodoList);
   }
 
-  function handleSubmit(todo) {
+  const handleSubmit = (todo) =>{
     const newTodoList = [...todoList];
     newTodoList.push(todo);
     setTodoList(newTodoList);
   }
 
-  function onSubmitEdit(todo) {
+  const onSubmitEdit = (todo) =>{
     let newTodoList = [...todoList]
     const todoItem =  newTodoList.find(todoItem => todoItem.id === todo.id);
     todoItem.title = todo.title;
@@ -50,7 +50,7 @@ function App() {
   }
   
   return (
-    <div className="container">
+    <div className="App">
       <h1>My to-dos</h1>
       <TodoForm onSubmit={handleSubmit} />
       <TodoList

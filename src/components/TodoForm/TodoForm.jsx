@@ -1,39 +1,30 @@
 import React, { useState } from 'react';
-// import './style.css'
 import './style.scss'
 
-TodoForm.PropsTypes = {
-
-}
-
-function TodoForm(props){
-    const {onSubmit} = props;
-    const [value, setValue] = useState('');
+const TodoForm = ({onSubmit}) =>{
+    const [values, setValues] = useState({
+        title: '',
+    });
     
-
-    function handleOnchange(e){
-        setValue(e.target.value)
+    const handleOnchange = (e) =>{
+        setValues({...values, [e.target.name] : e.target.value})
+        console.log(values);
     }
 
-    function handleOnSubmit (e){
-        e.preventDefault()
-        if (!onSubmit) return;
-        if (!value){
-            return;
-        }
-        onSubmit({
+    const handleOnSubmit = (e) =>{
+        e.preventDefault();
+        values && onSubmit && onSubmit({
             id: new Date().valueOf(),
-            title: value,
+            title: values.title,
             isEdit: false,
             isComplete: false,
         });
-        console.log(value);
-        setValue('')
+        setValues({...values, title: '',})
     }
     return(
-        <div className="Form-Container">
+        <div className="TodoForm">
             <form onSubmit = {handleOnSubmit}>
-                <input className="Form-Input" type="text" value = {value} onChange = {handleOnchange} placeholder="Create a new to-do..."/>
+                <input className="TodoForm-Input" type="text" name="title" value = {values.title} onChange = {handleOnchange} placeholder="Create a new to-do..."/>
             </form>    
         </div>
     )
